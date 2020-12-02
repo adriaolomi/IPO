@@ -26,21 +26,16 @@
          ];
           
          var nodes = [
-           { id: 0, label: "0maria", group: 0 },
+           { id: 0, label: "0", group: 0 },
            { id: 1, label: "1", group: 0 },
-           { id: 2, label: "2", group: 0 },
-           { id: 3, label: "3", group: 1 },
-           { id: 4, label: "4", group: 1 },
+           { id: 2, label: "2", group: 1 },
+           { id: 3, label: "3", group: 2 },
+           { id: 4, label: "4", group: 3 },
          ];
          var edges = [
            { from: 1, to: 0 },
            { from: 2, to: 0 },
            { from: 4, to: 3 },
-           { from: 5, to: 4 },
-           { from: 4, to: 0 },
-           { from: 7, to: 6 },
-           { from: 8, to: 7 },
-           { from: 7, to: 0 },
          ];
          
          // create a network
@@ -52,7 +47,7 @@
          var options = {
            nodes: {
              shape: "dot",
-             size: 30,
+             size: 20,
              font: {
                size: 32,
                color: "#ffffff",
@@ -162,17 +157,34 @@
         formNodos.addEventListener('submit', e => {
             e.preventDefault()
             
-            if(checkInputsNodo()) {
+            if(!isNaN(nodoEdad.value)) {
                 addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.value)
-            } 
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Introduce una edad correcta!',
+                })
+            }
         })
-          
-        function checkInputsNodo() {
-            
-        }
         
         function getGroup(age, patology) {
+            var group = 0; 
+            if(parseInt(age) > 80) {
+                group = 2;  // red 
+            } else if(parseInt(age) > 55) {
+                group = 1;  // yellow
+            } else if(parseInt(age) > 30) {
+                group = 3;  // green
+            } else {
+                group = 0;  // blue 
+            }
             
+            if(patology == "on") {
+                group = 2;  // red
+            }
+            
+            return group; 
         } 
         
         function addEdge(node1, node2) {
@@ -181,7 +193,7 @@
         }
         
         function addNode(name, surname, phone, age, patology) {
-            nodes.push({id: globalID, label: (capitalize(name)+" "+capitalize(surname)+"("+globalID+")"), group: 1})
+            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age.value, patology.value)})
             network = new vis.Network(container, data, options);
             globalID++
         }
@@ -217,8 +229,11 @@
         }
         
         const capitalize = (s) => {
-            if (typeof s !== 'string') return ''
+            if (typeof s !== 'string') {
+                return s
+            } else {
                 return s.charAt(0).toUpperCase() + s.slice(1)
+            }
         }
         
         network.on("doubleClick", function(properties) {
