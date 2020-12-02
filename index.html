@@ -9,7 +9,13 @@
          <ul id="list"></ul>
          <div id="mynetwork"></div>
          <div id="info"></div>
-      </div>
+        <div class="container" style="float:center;">
+            <form id="form-data" class="form">
+               <button id="exportar">Exportar</button> <button id="importar">Importar</button>
+            </form>
+         </div>
+          </div>
+      
       <script type="text/javascript">
          var color = "gray";
          var len = undefined;
@@ -177,11 +183,41 @@
         const nodoEdad = document.getElementById('nodo-edad');
         const nodoPatologias = document.getElementById('nodo-patologias'); 
         
-          formNodos.addEventListener('submit', e => {
+        formNodos.addEventListener('submit', e => {
             e.preventDefault()
             alert("Yea"+nodoNombre.value+" "+nodoApellido.value+" "+nodoTelefono.value+" "+nodoEdad.value)
             alert("Pat: "+nodoPatologias.value)
         })
+          
+        const exportar = document.getElementById('exportar');
+        exportar.addEventListener('click', e => {
+            e.preventDefault()
+            alert("Yeaaaa")
+        })
+          
+        const importar = document.getElementById('importar'); 
+        importar.addEventListener('click', e => {
+            e.preventDefault()
+            alert("Yea222")
+        })
+          
+        function checkInputsContacto() {
+            
+        }  
+          
+        function checkInputsNodo() {
+            
+        }
+          
+        function exportData() {
+            
+        }
+          
+        function importData() {
+            
+        }
+          
+        
           
         
       </script>
