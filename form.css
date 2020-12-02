@@ -7,15 +7,15 @@
 }
 
 .container {
-    margin: auto;
+    margin: 0 auto;
 	background-color: #fff;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
 	width: 400px;
 	max-width: 100%;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .header {
@@ -29,7 +29,7 @@
 }
 
 .form {
-	padding: 50px 40px;	
+	padding: 15px 25px;	
 }
 
 .form-control {
@@ -50,7 +50,7 @@
 	font-family: inherit;
 	font-size: 14px;
 	padding: 10px;
-	width: 100%;
+	width: 50%;
 }
 
 .form-control input:focus {
