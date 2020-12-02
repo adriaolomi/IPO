@@ -104,41 +104,55 @@
          network = new vis.Network(container, data, options);
          
       </script>
-       <div class="container">
-	<div class="header">
-		<h2>Create Account</h2>
-	</div>
-	<form id="form" class="form">
+    <div class="container">
+	<form id="form-contactos" class="form">
 		<div class="form-control">
-			<label for="username">Username</label>
-			<input type="text" placeholder="florinpop17" id="username" />
+			<label for="ID-infectado">ID infectado</label>
+			<input type="text" placeholder="1" id="ID-infectado" />
 			<i class="fas fa-check-circle"></i>
 			<i class="fas fa-exclamation-circle"></i>
 			<small>Error message</small>
 		</div>
 		<div class="form-control">
-			<label for="username">Email</label>
-			<input type="email" placeholder="a@florin-pop.com" id="email" />
+			<label for="ID-posible-contagio">ID posible contagio</label>
+			<input type="email" placeholder="2" id="ID-posible-contagio" />
 			<i class="fas fa-check-circle"></i>
 			<i class="fas fa-exclamation-circle"></i>
 			<small>Error message</small>
 		</div>
-		<div class="form-control">
-			<label for="username">Password</label>
-			<input type="password" placeholder="Password" id="password" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<label for="username">Password check</label>
-			<input type="password" placeholder="Password two" id="password2" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<button>Submit</button>
+		<button>Añadir contacto</button>
 	</form>
-</div>
+   </div>
+       
+        <div class="container">
+	<form id="form-nodo" class="form">
+		<div class="form-control">
+			<label for="ID-infectado">Nombre</label>
+			<input type="text" placeholder="1" id="ID-infectado" />
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+		<div class="form-control">
+			<label for="ID-posible-contagio">Apellido</label>
+			<input type="email" placeholder="2" id="ID-posible-contagio" />
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+        <div class="form-control">
+			<label for="ID-posible-contagio">Edad</label>
+			<input type="email" placeholder="2" id="ID-posible-contagio" />
+			<i class="fas fa-check-circle"></i>
+			<i class="fas fa-exclamation-circle"></i>
+			<small>Error message</small>
+		</div>
+
+        <div>
+            <label>Patologias previas        <input type="checkbox" class="checkbox-class" /></label>
+		</div>
+		<button>Añadir contacto</button>
+	</form>
+   </div>
    </body>
 </html>
