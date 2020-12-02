@@ -10,7 +10,6 @@
          <div id="mynetwork"></div>
          <div id="info"></div>
       </div>
-      <script type="text/javascript" src="myscript.js"></script>
       <script type="text/javascript">
          var color = "gray";
          var len = undefined;
@@ -114,7 +113,7 @@
                </div>
                <div class="form-control">
                   <label for="ID-posible-contagio">ID posible contagio</label>
-                  <input type="email" placeholder="2" id="ID-posible-contagio" />
+                  <input type="text" placeholder="2" id="ID-posible-contagio" />
                   <i class="fas fa-check-circle"></i>
                   <i class="fas fa-exclamation-circle"></i>
                   <small>Error message</small>
@@ -126,33 +125,65 @@
             <div class="container">
                <form id="form-nodo" class="form">
                   <div class="form-control">
-                     <label for="ID-infectado">Nombre</label>
-                     <input type="text" placeholder="1" id="ID-infectado" />
+                     <label for="nodo-nombre">Nombre</label>
+                     <input type="text" placeholder="1" id="nodo-nombre" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
                   </div>
                   <div class="form-control">
-                     <label for="ID-posible-contagio">Apellido</label>
-                     <input type="email" placeholder="2" id="ID-posible-contagio" />
+                     <label for="nodo-apellido">Apellido</label>
+                     <input type="text" placeholder="2" id="nodo-apellido" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
                   </div>
                   <div class="form-control">
-                     <label for="ID-posible-contagio">Edad</label>
-                     <input type="email" placeholder="2" id="ID-posible-contagio" />
+                     <label for="nodo-telefono">Teléfono</label>
+                     <input type="text" placeholder="2" id="nodo-telefono" />
+                     <i class="fas fa-check-circle"></i>
+                     <i class="fas fa-exclamation-circle"></i>
+                     <small>Error message</small>
+                  </div>
+                  <div class="form-control">
+                     <label for="nodo-edad">Edad</label>
+                     <input type="text" placeholder="2" id="nodo-edad" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
                   </div>
                   <div>
-                     <label>Patologias previas        <input type="checkbox" class="checkbox-class" /></label>
+                     <label>Patologias previas        <input type="checkbox" class="checkbox-class" id="nodo-patologias"/></label>
                   </div>
                   <button>Añadir contacto</button>
                </form>
             </div>
+             
          </div>
       </div>
+      <script>
+        const formContacto = document.getElementById('form-contactos'); 
+        const idInfectado = document.getElementById('ID-infectado');
+        const idPosibleContagio = document.getElementById('ID-posible-contagio'); 
+        formContacto.addEventListener('submit', e => {
+            e.preventDefault()
+            alert("Yea"+idInfectado.value+" "+idPosibleContagio.value) 
+         }) 
+
+        const formNodos = document.getElementById('form-nodo');
+        const nodoNombre = document.getElementById('nodo-nombre'); 
+        const nodoApellido = document.getElementById('nodo-apellido'); 
+        const nodoTelefono = document.getElementById('nodo-telefono'); 
+        const nodoEdad = document.getElementById('nodo-edad');
+        const nodoPatologias = document.getElementById('nodo-patologias'); 
+        
+          formNodos.addEventListener('submit', e => {
+            e.preventDefault()
+            alert("Yea"+nodoNombre.value+" "+nodoApellido.value+" "+nodoTelefono.value+" "+nodoEdad.value)
+            alert("Pat: "+nodoPatologias.value)
+        })
+          
+        
+      </script>
    </body>
 </html>
