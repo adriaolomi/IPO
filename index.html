@@ -2,6 +2,7 @@
    <head>
       <link rel="stylesheet" href="graph-style.css">
       <link rel="stylesheet" href="form.css">
+       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
       <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
    </head>
    <body>
@@ -20,6 +21,10 @@
          var color = "gray";
          var len = undefined;
          
+         var nodeInfo = [
+             {id: 0, name: "Yago", surname: "Fernandez", group: 0, age: 10, patology: true},
+         ];
+          
          var nodes = [
            { id: 0, label: "0maria", group: 0 },
            { id: 1, label: "1", group: 0 },
@@ -72,8 +77,8 @@
                   <small>Error message</small>
                </div>
                <div class="form-control">
-                  <label for="ID-posible-contagio">ID posible contagio</label>
-                  <input type="text" placeholder="2" id="ID-posible-contagio" />
+                  <label for="ID-contagio">ID posible contagio</label>
+                  <input type="text" placeholder="2" id="ID-contagio" />
                   <i class="fas fa-check-circle"></i>
                   <i class="fas fa-exclamation-circle"></i>
                   <small>Error message</small>
@@ -126,11 +131,27 @@
           
         const formContacto = document.getElementById('form-contactos'); 
         const idInfectado = document.getElementById('ID-infectado');
-        const idPosibleContagio = document.getElementById('ID-posible-contagio'); 
+        const idContagio = document.getElementById('ID-contagio'); 
         formContacto.addEventListener('submit', e => {
             e.preventDefault() 
-            addEdge(idInfectado.value, idPosibleContagio.value)  
-         }) 
+            
+            var idInf = parseInt(idInfectado.value);
+            var idCont = parseInt(idContagio.value);
+            
+            if(checkInputsContacto(idInf, idCont)) {
+                addEdge(idInf, idCont)  
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Identificador no disponible!',
+                })
+            }
+         })
+          
+        function checkInputsContacto(idInf, idCont) {
+            return ((parseInt(idInf) < globalID) && (parseInt(idCont) < globalID));
+        }
 
         const formNodos = document.getElementById('form-nodo');
         const nodoNombre = document.getElementById('nodo-nombre'); 
@@ -141,22 +162,10 @@
         formNodos.addEventListener('submit', e => {
             e.preventDefault()
             
-            addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.value)
+            if(checkInputsNodo()) {
+                addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.value)
+            } 
         })
-          
-        const exportar = document.getElementById('exportar');
-        exportar.addEventListener('click', e => {
-            e.preventDefault()
-        })
-          
-        const importar = document.getElementById('importar'); 
-        importar.addEventListener('click', e => {
-            e.preventDefault()
-        })
-          
-        function checkInputsContacto() {
-            
-        }  
           
         function checkInputsNodo() {
             
@@ -167,27 +176,54 @@
         } 
         
         function addEdge(node1, node2) {
-            alert(node1+"+"+node2)
             edges.push({from: node1, to: node2})
+            network = new vis.Network(container, data, options);
         }
         
         function addNode(name, surname, phone, age, patology) {
-            nodes.push({id: globalID, label: (name+" "+surname+"("+globalID+")"), group: 1})
+            nodes.push({id: globalID, label: (capitalize(name)+" "+capitalize(surname)+"("+globalID+")"), group: 1})
             network = new vis.Network(container, data, options);
             globalID++
         }
           
-        network.on("doubleClick", function(properties) {
-            alert("Alerta")
-        });
+        const exportar = document.getElementById('exportar');
+        exportar.addEventListener('click', e => {
+            e.preventDefault(); 
+            
+            exportData(); 
+        })
+          
+        const importar = document.getElementById('importar'); 
+        importar.addEventListener('click', e => {
+            e.preventDefault(); 
+            
+            importData(); 
+        })
           
         function exportData() {
-            
+            Swal.fire(
+                'Exportar?',
+                'Esta opcion permitiria descargar el grafo!',
+                'question'
+            )  
         }
           
         function importData() {
-            
+            Swal.fire(
+                'Importar?',
+                'Esta opcion permitiria subir nuevos grafos!',
+                'question'
+            ) 
         }
+        
+        const capitalize = (s) => {
+            if (typeof s !== 'string') return ''
+                return s.charAt(0).toUpperCase() + s.slice(1)
+        }
+        
+        network.on("doubleClick", function(properties) {
+            alert("Alerta")
+        });
           
       </script>
    </body>
