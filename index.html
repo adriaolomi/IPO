@@ -59,6 +59,16 @@
            },
          };
          network = new vis.Network(container, data, options);
+         alert("Fix getgroups()");
+         alert("Fix seleccionar nodo()"); 
+         network.on("click", function(properties) {
+            Swal.fire(
+                // devolver sweet alert para pedir id y mostrar info
+                'Importar?',
+                'Esta opcion permitiria subir nuevos grafos!',
+                'question'
+            ) 
+         });
          
       </script>
       <div class="col-sm-6" style="float:center;">
@@ -193,6 +203,7 @@
         }
         
         function addNode(name, surname, phone, age, patology) {
+            alert(getGroup(age.value, patology.value))
             nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age.value, patology.value)})
             network = new vis.Network(container, data, options);
             globalID++
@@ -235,10 +246,6 @@
                 return s.charAt(0).toUpperCase() + s.slice(1)
             }
         }
-        
-        network.on("doubleClick", function(properties) {
-            alert("Alerta")
-        });
           
       </script>
    </body>
