@@ -1,18 +1,16 @@
 <html>
    <head>
-        <link rel="stylesheet" href="graph-style.css">
-       <link rel="stylesheet" href="form.css">
-       <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
-       
-    
+      <link rel="stylesheet" href="graph-style.css">
+      <link rel="stylesheet" href="form.css">
+      <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
    </head>
    <body>
-      <div id="grid-container">
+      <div style="float:left;">
          <ul id="list"></ul>
          <div id="mynetwork"></div>
          <div id="info"></div>
       </div>
-    <script type="text/javascript" src="myscript.js"></script>
+      <script type="text/javascript" src="myscript.js"></script>
       <script type="text/javascript">
          var color = "gray";
          var len = undefined;
@@ -104,55 +102,57 @@
          network = new vis.Network(container, data, options);
          
       </script>
-    <div class="container">
-	<form id="form-contactos" class="form">
-		<div class="form-control">
-			<label for="ID-infectado">ID infectado</label>
-			<input type="text" placeholder="1" id="ID-infectado" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<label for="ID-posible-contagio">ID posible contagio</label>
-			<input type="email" placeholder="2" id="ID-posible-contagio" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<button>Añadir contacto</button>
-	</form>
-   </div>
-       
-        <div class="container">
-	<form id="form-nodo" class="form">
-		<div class="form-control">
-			<label for="ID-infectado">Nombre</label>
-			<input type="text" placeholder="1" id="ID-infectado" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-		<div class="form-control">
-			<label for="ID-posible-contagio">Apellido</label>
-			<input type="email" placeholder="2" id="ID-posible-contagio" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-        <div class="form-control">
-			<label for="ID-posible-contagio">Edad</label>
-			<input type="email" placeholder="2" id="ID-posible-contagio" />
-			<i class="fas fa-check-circle"></i>
-			<i class="fas fa-exclamation-circle"></i>
-			<small>Error message</small>
-		</div>
-
-        <div>
-            <label>Patologias previas        <input type="checkbox" class="checkbox-class" /></label>
-		</div>
-		<button>Añadir contacto</button>
-	</form>
-   </div>
+      <div class="col-sm-6" style="float:center;">
+         <div class="container" style="float:center;">
+            <form id="form-contactos" class="form">
+               <div class="form-control">
+                  <label for="ID-infectado">ID infectado</label>
+                  <input type="text" placeholder="1" id="ID-infectado" />
+                  <i class="fas fa-check-circle"></i>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <small>Error message</small>
+               </div>
+               <div class="form-control">
+                  <label for="ID-posible-contagio">ID posible contagio</label>
+                  <input type="email" placeholder="2" id="ID-posible-contagio" />
+                  <i class="fas fa-check-circle"></i>
+                  <i class="fas fa-exclamation-circle"></i>
+                  <small>Error message</small>
+               </div>
+               <button>Añadir contacto</button>
+            </form>
+         </div>
+         <div id="grid-container">
+            <div class="container">
+               <form id="form-nodo" class="form">
+                  <div class="form-control">
+                     <label for="ID-infectado">Nombre</label>
+                     <input type="text" placeholder="1" id="ID-infectado" />
+                     <i class="fas fa-check-circle"></i>
+                     <i class="fas fa-exclamation-circle"></i>
+                     <small>Error message</small>
+                  </div>
+                  <div class="form-control">
+                     <label for="ID-posible-contagio">Apellido</label>
+                     <input type="email" placeholder="2" id="ID-posible-contagio" />
+                     <i class="fas fa-check-circle"></i>
+                     <i class="fas fa-exclamation-circle"></i>
+                     <small>Error message</small>
+                  </div>
+                  <div class="form-control">
+                     <label for="ID-posible-contagio">Edad</label>
+                     <input type="email" placeholder="2" id="ID-posible-contagio" />
+                     <i class="fas fa-check-circle"></i>
+                     <i class="fas fa-exclamation-circle"></i>
+                     <small>Error message</small>
+                  </div>
+                  <div>
+                     <label>Patologias previas        <input type="checkbox" class="checkbox-class" /></label>
+                  </div>
+                  <button>Añadir contacto</button>
+               </form>
+            </div>
+         </div>
+      </div>
    </body>
 </html>
