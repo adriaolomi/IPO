@@ -20,11 +20,7 @@
       <script type="text/javascript">
          var color = "gray";
          var len = undefined;
-         
-         var nodeInfo = [
-             {id: 0, name: "Yago", surname: "Fernandez", group: 0, age: 10, patology: true},
-         ];
-          
+        
          var nodes = [
            { id: 0, label: "0", group: 0 },
            { id: 1, label: "1", group: 0 },
@@ -58,10 +54,9 @@
              width: 2,
            },
          };
+
          network = new vis.Network(container, data, options);
-         alert("Fix getgroups()");
-         alert("Fix seleccionar nodo()"); 
-         network.on("click", function(properties) {
+         network.on("doubleClick", function() {
             Swal.fire(
                 // devolver sweet alert para pedir id y mostrar info
                 'Importar?',
@@ -69,21 +64,20 @@
                 'question'
             ) 
          });
-         
       </script>
       <div class="col-sm-6" style="float:center;">
          <div class="container" style="float:center;">
             <form id="form-contactos" class="form">
                <div class="form-control">
                   <label for="ID-infectado">ID infectado</label>
-                  <input type="text" placeholder="1" id="ID-infectado" />
+                  <input type="text" placeholder="55" id="ID-infectado" />
                   <i class="fas fa-check-circle"></i>
                   <i class="fas fa-exclamation-circle"></i>
                   <small>Error message</small>
                </div>
                <div class="form-control">
                   <label for="ID-contagio">ID posible contagio</label>
-                  <input type="text" placeholder="2" id="ID-contagio" />
+                  <input type="text" placeholder="113" id="ID-contagio" />
                   <i class="fas fa-check-circle"></i>
                   <i class="fas fa-exclamation-circle"></i>
                   <small>Error message</small>
@@ -96,28 +90,28 @@
                <form id="form-nodo" class="form">
                   <div class="form-control">
                      <label for="nodo-nombre">Nombre</label>
-                     <input type="text" placeholder="1" id="nodo-nombre" />
+                     <input type="text" placeholder="Yago" id="nodo-nombre" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
                   </div>
                   <div class="form-control">
                      <label for="nodo-apellido">Apellido</label>
-                     <input type="text" placeholder="2" id="nodo-apellido" />
+                     <input type="text" placeholder="Fernandez" id="nodo-apellido" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
                   </div>
                   <div class="form-control">
                      <label for="nodo-telefono">Teléfono</label>
-                     <input type="text" placeholder="2" id="nodo-telefono" />
+                     <input type="text" placeholder="644732039" id="nodo-telefono" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
                   </div>
                   <div class="form-control">
                      <label for="nodo-edad">Edad</label>
-                     <input type="text" placeholder="2" id="nodo-edad" />
+                     <input type="text" placeholder="32" id="nodo-edad" />
                      <i class="fas fa-check-circle"></i>
                      <i class="fas fa-exclamation-circle"></i>
                      <small>Error message</small>
@@ -168,7 +162,7 @@
             e.preventDefault()
             
             if(!isNaN(nodoEdad.value)) {
-                addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.value)
+                addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.checked)
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -180,17 +174,17 @@
         
         function getGroup(age, patology) {
             var group = 0; 
-            if(parseInt(age) > 80) {
+            if(age > 80) {
                 group = 2;  // red 
-            } else if(parseInt(age) > 55) {
+            } else if(age > 55) {
                 group = 1;  // yellow
-            } else if(parseInt(age) > 30) {
+            } else if(age > 30) {
                 group = 3;  // green
             } else {
                 group = 0;  // blue 
             }
             
-            if(patology == "on") {
+            if(patology == true) {
                 group = 2;  // red
             }
             
@@ -200,12 +194,27 @@
         function addEdge(node1, node2) {
             edges.push({from: node1, to: node2})
             network = new vis.Network(container, data, options);
+            network.on("doubleClick", function() {
+            Swal.fire(
+                // devolver sweet alert para pedir id y mostrar info
+                'Importar?',
+                'Esta opcion permitiria subir nuevos grafos!',
+                'question'
+            ) 
+         });
         }
         
         function addNode(name, surname, phone, age, patology) {
-            alert(getGroup(age.value, patology.value))
-            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age.value, patology.value)})
+            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age, patology)})
             network = new vis.Network(container, data, options);
+            network.on("doubleClick", function() {
+            Swal.fire(
+                // devolver sweet alert para pedir id y mostrar info
+                'Importar?',
+                'Esta opcion permitiria subir nuevos grafos!',
+                'question'
+            ) 
+         });
             globalID++
         }
           
@@ -238,7 +247,9 @@
                 'question'
             ) 
         }
-        
+
+
+
         const capitalize = (s) => {
             if (typeof s !== 'string') {
                 return s
