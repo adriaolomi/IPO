@@ -18,15 +18,20 @@
           </div>
       
       <script type="text/javascript">
+
+         const grupoSinRiesgo = 2;
+         const grupoMinimoRiesgo = 3; 
+         const grupoRiesgoMedio = 0;
+         const grupoRiesgoAlto = 1;
          var color = "gray";
          var len = undefined;
         
          var nodes = [
-           { id: 0, label: "0", group: 0 },
-           { id: 1, label: "1", group: 0 },
-           { id: 2, label: "2", group: 1 },
-           { id: 3, label: "3", group: 2 },
-           { id: 4, label: "4", group: 3 },
+           { id: 0, label: "Cesar Mauri", group: 2},
+           { id: 1, label: "Victor Suarez", group: 0},
+           { id: 2, label: "Jon Navarro", group: 1},
+           { id: 3, label: "Adria Olomi", group: 2},
+           { id: 4, label: "Adria Ribas", group: 3},
          ];
          var edges = [
            { from: 1, to: 0 },
@@ -48,9 +53,10 @@
                size: 32,
                color: "#ffffff",
              },
-             borderWidth: 2,
+             borderWidth: 1,
            },
            edges: {
+             length: 150, 
              width: 2,
            },
          };
@@ -58,9 +64,8 @@
          network = new vis.Network(container, data, options);
          network.on("doubleClick", function() {
             Swal.fire(
-                // devolver sweet alert para pedir id y mostrar info
-                'Importar?',
-                'Esta opcion permitiria subir nuevos grafos!',
+                'Doble click en el nodo?',
+                'Esta opcion permitiria obtener los datos del nodo!',
                 'question'
             ) 
          });
@@ -163,9 +168,7 @@
             
             if(checkInputsNodo()) {
                 addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.checked)
-            } else {
-                alert('err')
-            }
+            } 
         })
 
         function checkInputsNodo() {
@@ -213,17 +216,17 @@
         function getGroup(age, patology) {
             var group = 0; 
             if(age > 80) {
-                group = 2;  // red 
+                group = grupoRiesgoAlto;  // red 
             } else if(age > 55) {
-                group = 1;  // yellow
+                group = grupoRiesgoMedio;  // yellow
             } else if(age > 30) {
-                group = 3;  // green
+                group = grupoMinimoRiesgo;  // green
             } else {
-                group = 0;  // blue 
+                group = grupoSinRiesgo;  // blue 
             }
             
             if(patology == true) {
-                group = 2;  // red
+                group = grupoRiesgoAlto;  // red
             }
             
             return group; 
@@ -234,22 +237,21 @@
             network = new vis.Network(container, data, options);
             network.on("doubleClick", function() {
             Swal.fire(
-                // devolver sweet alert para pedir id y mostrar info
-                'Importar?',
-                'Esta opcion permitiria subir nuevos grafos!',
+                'Doble click en el nodo?',
+                'Esta opcion permitiria obtener los datos del nodo!',
                 'question'
             ) 
          });
         }
         
         function addNode(name, surname, phone, age, patology) {
-            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age, patology)})
+            getGroup(age, patology)
+            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age, patology)});
             network = new vis.Network(container, data, options);
             network.on("doubleClick", function() {
             Swal.fire(
-                // devolver sweet alert para pedir id y mostrar info
-                'Importar?',
-                'Esta opcion permitiria subir nuevos grafos!',
+                'Doble click en el nodo?',
+                'Esta opcion permitiria obtener los datos del nodo!',
                 'question'
             ) 
          });
