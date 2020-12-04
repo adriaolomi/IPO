@@ -161,16 +161,54 @@
         formNodos.addEventListener('submit', e => {
             e.preventDefault()
             
-            if(!isNaN(nodoEdad.value)) {
+            if(checkInputsNodo()) {
                 addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.checked)
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Introduce una edad correcta!',
-                })
+                alert('err')
             }
         })
+
+        function checkInputsNodo() {
+            ret = true; 
+
+	        const usernameNombreCheck = nodoNombre.value;
+	        const nodoApellidoCheck = nodoApellido.value;
+            const nodoEdadCheck = nodoEdad.value; 
+	
+	        if(usernameNombreCheck === '') {
+		        setErrorFor(nodoNombre, 'Nombre no puede estar vacio');
+                ret = false; 
+            } else {
+		        setSuccessFor(nodoNombre);
+	        }
+	
+	        if(nodoApellidoCheck === '') {
+		        setErrorFor(nodoApellido, 'Apellido no puede estar vacio');
+                ret = false; 
+	        } else {
+		        setSuccessFor(nodoApellido);
+            }
+
+            if(isNaN(nodoEdadCheck) || nodoEdadCheck === '') {
+                setErrorFor(nodoEdad, 'Edad invalida')
+                ret = false; 
+            } else {
+               setSuccessFor(nodoEdad);
+            }
+            return ret 
+        }
+
+        function setErrorFor(input, message) {
+	        const formControl = input.parentElement;
+	        const small = formControl.querySelector('small');
+	        formControl.className = 'form-control error';
+	        small.innerText = message;
+        }
+
+        function setSuccessFor(input) {
+	        const formControl = input.parentElement;
+	        formControl.className = 'form-control success';
+        }
         
         function getGroup(age, patology) {
             var group = 0; 
