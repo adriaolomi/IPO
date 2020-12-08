@@ -25,6 +25,17 @@
          const grupoRiesgoAlto = 1;
          var color = "gray";
          var len = undefined;
+
+         function getDistance(porcentaje) {
+            ret = 0; 
+            if((porcentaje) < 10) {
+                ret = 100
+            } else {
+                ret = porcentaje*5
+            }
+
+            return (600 - ret);  
+        }
         
          var nodes = [
            { id: 0, label: "Cesar Mauri(0)", group: 2},
@@ -34,9 +45,10 @@
            { id: 4, label: "Adria Ribas(4)", group: 3},
          ];
          var edges = [
-           { from: 1, to: 0 },
-           { from: 2, to: 0 },
-           { from: 4, to: 3 },
+           { from: 1, to: 0, length: getDistance(30), title: "30%"},
+           { from: 2, to: 0, length: getDistance(50), title: "50%"},
+           { from: 3, to: 0, length: getDistance(70), title: "70%"},
+           { from: 4, to: 0, length: getDistance(100), title: "100%"},
          ];
          
          // create a network
@@ -87,6 +99,13 @@
                   <i class="fas fa-exclamation-circle"></i>
                   <small>Error message</small>
                </div>
+               <div class="form-control">
+                <label for="ID-porcentaje">Probabilidad contagio(%)</label>
+                <input type="text" placeholder="50%" id="ID-porcentaje" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+             </div>
                <button>Añadir contacto</button>
             </form>
          </div>
@@ -136,25 +155,37 @@
         const formContacto = document.getElementById('form-contactos'); 
         const idInfectado = document.getElementById('ID-infectado');
         const idContagio = document.getElementById('ID-contagio'); 
+        const idPorcentaje = document.getElementById('ID-porcentaje'); 
         formContacto.addEventListener('submit', e => {
             e.preventDefault() 
             
-            var idInf = parseInt(idInfectado.value);
-            var idCont = parseInt(idContagio.value);
+
+            var idInf = idInfectado.value;
+            var idCont = idContagio.value;
+            var idPorc = idPorcentaje.value; 
             
-            if(checkInputsContacto(idInf, idCont)) {
-                addEdge(idInf, idCont)  
+            if(checkInputsContacto(idInf, idCont, idPorc)) {
+                addEdge(parseInt(idInf), parseInt(idCont), parseInt(idPorc));   
             } else {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Identificador no disponible!',
+                    text: 'Entrada no valida!',
                 })
             }
          })
           
-        function checkInputsContacto(idInf, idCont) {
-            return ((parseInt(idInf) < globalID) && (parseInt(idCont) < globalID));
+        function checkInputsContacto(idInf, idCont, idPorc) {
+            ret = true; 
+
+            ret &&= ((parseInt(idInf) < globalID) && (parseInt(idCont) < globalID));
+            if(!isNaN(idPorc) && !isNaN(idPorc)) {
+                ret &&= (parseInt(idPorc) <= 100) && (parseInt(idPorc) >= 0); 
+            } else {
+                ret = false;
+            }
+
+            return ret; 
         }
 
         const formNodos = document.getElementById('form-nodo');
@@ -232,8 +263,8 @@
             return group; 
         } 
         
-        function addEdge(node1, node2) {
-            edges.push({from: node1, to: node2})
+        function addEdge(node1, node2, porcentaje) {
+            edges.push({from: node1, to: node2, length: getDistance(porcentaje), title:porcentaje+"%"})
             network = new vis.Network(container, data, options);
             network.on("doubleClick", function() {
             Swal.fire(
@@ -287,8 +318,6 @@
                 'question'
             ) 
         }
-
-
 
         const capitalize = (s) => {
             if (typeof s !== 'string') {
