@@ -38,11 +38,11 @@
         }
         
          var nodes = [
-           { id: 0, label: "Cesar Mauri(0)", group: 2},
-           { id: 1, label: "Victor Suarez(1)", group: 0},
-           { id: 2, label: "Jon Navarro(2)", group: 1},
-           { id: 3, label: "Adria Olomi(3)", group: 2},
-           { id: 4, label: "Adria Ribas(4)", group: 3},
+           { id: 0, label: "Cesar Mauri(0)", color:"#AF2608"},
+           { id: 1, label: "Victor Suarez(1)", color:"#FF3104" },
+           { id: 2, label: "Jon Navarro(2)", color:"#E8674B"},
+           { id: 3, label: "Adria Olomi(3)", color:"#AF2608"},
+           { id: 4, label: "Adria Ribas(4)", color:"#FEE0D9"},
          ];
          var edges = [
            { from: 1, to: 0, length: getDistance(30), title: "30%"},
@@ -245,19 +245,30 @@
         }
         
         function getGroup(age, patology) {
+            
+            var color = "#FFFFFF" - (age * "#FF");
+            
+            if(patology == true) {
+                color = "#FF0000"
+            }
+            
+            return color; 
+        } 
+          
+        function getGroup(age, patology) {
             var group = 0; 
             if(age > 80) {
-                group = grupoRiesgoAlto;  // red 
+                group = "#AF2608"  // red 
             } else if(age > 55) {
-                group = grupoRiesgoMedio;  // yellow
+                group = "#FF3104"
             } else if(age > 30) {
-                group = grupoMinimoRiesgo;  // green
+                group = "#E8674B"  // green
             } else {
-                group = grupoSinRiesgo;  // blue 
+                group = "#FEE0D9"   // blue 
             }
             
             if(patology == true) {
-                group = grupoRiesgoAlto;  // red
+                group = "#AF2608"  // red
             }
             
             return group; 
@@ -276,8 +287,7 @@
         }
         
         function addNode(name, surname, phone, age, patology) {
-            getGroup(age, patology)
-            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), group: getGroup(age, patology)});
+            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), color: getGroup(age, patology)}); 
             network = new vis.Network(container, data, options);
             network.on("doubleClick", function() {
             Swal.fire(
