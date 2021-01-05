@@ -142,6 +142,7 @@
                   </div>
                   <div>
                      <label>Patologias previas        <input type="checkbox" class="checkbox-class" id="nodo-patologias"/></label>
+	             <label>Infectado		      <input type="checkbox" class="checkbox-class" id="nodo-infectado"/></label>
                   </div>
                   <button>Añadir contacto</button>
                </form>
@@ -153,14 +154,14 @@
         var globalID = nodes.length; 
           
         const formContacto = document.getElementById('form-contactos'); 
-        const idInfectado = document.getElementById('ID-infectado');
+        const idPersona = document.getElementById('ID-persona');
         const idContagio = document.getElementById('ID-contagio'); 
         const idPorcentaje = document.getElementById('ID-porcentaje'); 
         formContacto.addEventListener('submit', e => {
             e.preventDefault() 
             
 
-            var idInf = idInfectado.value;
+            var idInf = idPersona.value;
             var idCont = idContagio.value;
             var idPorc = idPorcentaje.value; 
             
@@ -194,11 +195,12 @@
         const nodoTelefono = document.getElementById('nodo-telefono'); 
         const nodoEdad = document.getElementById('nodo-edad');
         const nodoPatologias = document.getElementById('nodo-patologias'); 
+	const nodoInfectado = document.getElementById('nodo-infectado');
         formNodos.addEventListener('submit', e => {
             e.preventDefault()
             
             if(checkInputsNodo()) {
-                addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.checked)
+                addNode(nodoNombre.value, nodoApellido.value, nodoTelefono.value, parseInt(nodoEdad.value), nodoPatologias.checked, nodoInfectado.checked)
             } 
         })
 
@@ -244,13 +246,19 @@
 	        formControl.className = 'form-control success';
         }
         
-        function getGroup(age, patology) {
+        function getGroup(age, patology, infectado) {
             
-            var color = "#FFFFFF" - (age * "#FF");
+            var color = "#FFFFFF" - (age * "#EF9118");
+		
+		if (infectado == true){
+			color = "#FF0000"
+		}
             
             if(patology == true) {
-                color = "#FF0000"
+                color = "#EF9118"
             }
+		
+	  
             
             return color; 
         } 
@@ -286,8 +294,8 @@
          });
         }
         
-        function addNode(name, surname, phone, age, patology) {
-            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), color: getGroup(age, patology)}); 
+        function addNode(name, surname, phone, age, patology, infectado) {
+            nodes.push({id: globalID, label: (capitalize(name)+" "+surname+"("+globalID+")"), color: getGroup(age, patology, infectado)}); 
             network = new vis.Network(container, data, options);
             network.on("doubleClick", function() {
             Swal.fire(
