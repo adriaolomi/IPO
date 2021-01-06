@@ -38,11 +38,11 @@
         }
         
          var nodes = [
-           { id: 0, label: "Cesar Mauri(0)", color:"#AF2608"},
-           { id: 1, label: "Victor Suarez(1)", color:"#FF3104" },
-           { id: 2, label: "Jon Navarro(2)", color:"#E8674B"},
-           { id: 3, label: "Adria Olomi(3)", color:"#AF2608"},
-           { id: 4, label: "Adria Ribas(4)", color:"#FEE0D9"},
+           { id: 0, label: "Cesar Mauri(0)", color:"#FF0000"},
+           { id: 1, label: "Victor Suarez(1)", color:"#EC680C" },
+           { id: 2, label: "Jon Navarro(2)", color:"#EC680C"},
+           { id: 3, label: "Adria Olomi(3)", color:"#EC680C"},
+           { id: 4, label: "Adria Ribas(4)", color:"#EC680C"},
          ];
          var edges = [
            { from: 1, to: 0, length: getDistance(30), title: "30%"},
@@ -142,6 +142,8 @@
                   </div>
                   <div>
                      <label>Patologias previas        <input type="checkbox" class="checkbox-class" id="nodo-patologias"/></label>
+		  </div>
+                  <div>
 	             <label>Infectado		      <input type="checkbox" class="checkbox-class" id="nodo-infectado"/></label>
                   </div>
                   <button>Añadir contacto</button>
