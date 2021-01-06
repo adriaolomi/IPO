@@ -252,17 +252,17 @@
             
             var color = "#FFFFFF" - (age * "#EF9118");
 		
-		if ((infectado == true) && (patology == true)){
-			color = "#C10505"
-		}
-		
-		else if (infectado == true){
+		if (infectado == true){
 			color = "#FF0000"
 		}
             
-            else if(patology == true) {
-                color = "#EC680C"
-            }
+                else if(patology == true) {
+                	color = "#EC680C"
+                }
+		
+		else if (infectado == true && patology == true){
+			color = "#C10505"
+		}
 		
 	  
             
