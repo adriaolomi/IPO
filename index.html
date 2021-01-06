@@ -39,10 +39,10 @@
         
          var nodes = [
            { id: 0, label: "Cesar Mauri(0)", color:"#FF0000"},
-           { id: 1, label: "Victor Suarez(1)", color:"#EC680C" },
-           { id: 2, label: "Jon Navarro(2)", color:"#EC680C"},
-           { id: 3, label: "Adria Olomi(3)", color:"#EC680C"},
-           { id: 4, label: "Adria Ribas(4)", color:"#EC680C"},
+           { id: 1, label: "Victor Suarez(1)", color:"#F3C561" },
+           { id: 2, label: "Jon Navarro(2)", color:"#F3C561"},
+           { id: 3, label: "Adria Olomi(3)", color:"#F3C561"},
+           { id: 4, label: "Adria Ribas(4)", color:"#F3C561"},
          ];
          var edges = [
            { from: 1, to: 0, length: getDistance(30), title: "30%"},
@@ -252,12 +252,16 @@
             
             var color = "#FFFFFF" - (age * "#EF9118");
 		
-		if (infectado == true){
+		if ((infectado == true) && (patology == true)){
+			color = "#C10505"
+		}
+		
+		else if (infectado == true){
 			color = "#FF0000"
 		}
             
-            if(patology == true) {
-                color = "#EF9118"
+            else if(patology == true) {
+                color = "#EC680C"
             }
 		
 	  
